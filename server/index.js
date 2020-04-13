@@ -11,8 +11,10 @@ const app = express();
 const POST = require("./models/post");
 const test = require("./models/test");
 
+const Router = require("./router");
+
 mongoose.connect(
-	"mongodb+srv://admin:asdasd!12@cluster0-gbqgc.mongodb.net/sample_airbnb",
+	"mongodb+srv://admin:asdasd!12@cluster0-gbqgc.mongodb.net/delete",
 	{
 		useNewUrlParser: true,
 		useCreateIndex: true,
@@ -44,12 +46,8 @@ app.use(cors());
 // app.use('/item', require('./router/item'))
 // app.use('/user', require('./router/user'))
 
+app.use("/post", Router.POST);
+
 http.createServer(app).listen(9998, function () {
 	console.log("Https server listening on port " + 9998);
-});
-
-app.get("/api", (req, res) => {
-	test.find({}, (err, doc) => {
-		res.send(doc);
-	});
 });
