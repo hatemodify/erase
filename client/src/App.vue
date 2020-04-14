@@ -1,11 +1,21 @@
 <template>
   <div id="app">
-    <div id="content-wrap">
+    <div id="content">
+      <Header/>
       <router-view />
     </div>
   </div>
 </template>
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import Header from './components/Header.vue'
 
+export default Vue.extend({
+  components:{
+    Header
+  }
+})
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -13,6 +23,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: #000;
+  min-height: 100vh;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -136,14 +147,15 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-#content-wrap {
+
+#content {
   width: 1080;
   margin: auto;
 }
