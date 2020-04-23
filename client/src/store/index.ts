@@ -1,14 +1,16 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
-import User from './post'
+import Vuex, { StoreOptions, ActionContext } from 'vuex'
+import Post from './post'
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export interface RootState {}
+
+const store: StoreOptions<any> = new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
   modules: {
-    User,
+    Post,
   },
 })
 

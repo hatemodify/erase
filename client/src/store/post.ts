@@ -1,20 +1,28 @@
-// store/modules/user.ts
-import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
-@Module({ namespaced: true, name: 'user' })
-class User extends VuexModule {
-  public name: any = 'asdasd'
+import axios from 'axios'
+import { Module } from 'vuex'
+import { RootState } from '@/store/index'
+import { PostModel } from '@/model/PostModel'
 
-  get nameUpperCase(){
-      return this.name
-  }
-
-  @Mutation
-  public setName(newName: string): void {
-    this.name = newName
-  }
-  @Action
-  public updateName(newName: string): void {
-    this.context.commit('setName', newName)
-  }
+interface State {
+  postList: Array<PostModel>
 }
-export default User
+const post: Module<State, RootState> = {
+  namespaced: true,
+  state: { postList: [] },
+
+  getters: { postData: state => state.postList },
+
+  mutations: {
+    setPostList(state, payload: Array<PostModel>) {
+      state.postList = payload
+    },
+  },
+
+  actions: {
+    async getPostList({ commit }) {
+      const { data } = await axios.get('/api/post/list').then(res => res)
+      commit('setPostList', data)
+    },
+  },
+}
+export default post

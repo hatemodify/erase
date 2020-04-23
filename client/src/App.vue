@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div id="content">
-      <Header/>
+    <Header/>
+    <div id="content">      
       <router-view />
     </div>
   </div>
@@ -156,7 +156,7 @@ table {
 }
 
 #content {
-  width: 1080;
+  padding:65px 65px 20px 65px;
   margin: auto;
 }
 </style>
