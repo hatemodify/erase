@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header/>
-    <div id="content">      
+    <Header />
+    <div id="content">
       <router-view />
     </div>
   </div>
@@ -11,9 +11,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import Header from './components/Header.vue'
 
 export default Vue.extend({
-  components:{
-    Header
-  }
+  components: {
+    Header,
+  },
 })
 </script>
 <style lang="scss">
@@ -116,6 +116,7 @@ video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  font-family: 'Noto Sans KR', 'Malgun Gothic';
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -156,7 +157,10 @@ table {
 }
 
 #content {
-  padding:65px 65px 20px 65px;
+  padding: 65px 150px 20px 150px;
   margin: auto;
+}
+*{
+  box-sizing: border-box;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="timer-comp">{{currentTime}}{{currentDate}}</div>
+  <div class="timer-comp">
+    <span class="current-time">{{currentTime}}</span>
+    <span class="current-date">{{currentDate}}</span>
+  </div>
 </template>
 
 
@@ -7,10 +10,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Clock extends Vue {
-  public hh: number = null
-  public mm: string = null
-  public ss: string = null
-  public ampm: string = null
+  public hh = 0
+  public mm = ''
+  public ampm = ''
   public week: Array<string> = [
     'Sunday',
     'Monday',
@@ -44,24 +46,34 @@ export default class Clock extends Vue {
         date.getMinutes() < 10
           ? `0${date.getMinutes()}`
           : date.getMinutes().toString()
-      this.ss =
-        date.getSeconds() < 10
-          ? `0${date.getSeconds()}`
-          : date.getSeconds().toString()
-      this.ampm = this.hh < 12 ? 'AM' : 'PM'
+      this.ampm = date.getHours() < 12 ? 'AM' : 'PM'
     }, 1000)
 
-    return `${this.hh}:${this.mm}:${this.ss} ${this.ampm}`
+    return `${this.hh}:${this.mm} ${this.ampm}`
   }
   get currentDate(): string {
     const date = new Date()
-    return `${this.week[date.getDay()]},${this.month[date.getMonth()]} ${date.getDate()}`
+    return `${this.week[date.getDay()]},${
+      this.month[date.getMonth()]
+    } ${date.getDate()}`
   }
-
 }
 </script>
 <style lang="scss" scoped>
 .timer-comp {
+  float: right;
+  text-align: right;
   font-size: 42px;
+  .current-time {
+    font-size: 42px;
+    line-height: 50px;
+  }
+  .current-date {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  [class^='current'] {
+    display: block;
+  }
 }
 </style>
