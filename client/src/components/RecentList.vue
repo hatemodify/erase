@@ -1,7 +1,7 @@
 <template>
   <ul class="recent-list">
     <li v-for="(item, idx) in post" :key="idx" :class="item.category">
-      <router-link to="">
+      <router-link to>
         <strong class="tit-post">{{item.title}}</strong>
         <div class="thumb-post">
           <img :src="categoryImg[item.category]" />
@@ -14,19 +14,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { CATEGORY_THUMB } from '../constants'
 @Component
 export default class RecentList extends Vue {
   @Prop() post!: Array<any>
-  public categoryImg: object = {
-    node:
-      'https://kdydesign.github.io/2017/07/15/nodejs-npm-tutorial/cover.png',
-    vue: 'https://miro.medium.com/max/3920/1*oZqGznbYXJfBlvGp5gQlYQ.jpeg',
-    react: 'https://miro.medium.com/max/1200/0*XCgoYU9sqt95P8J0.png',
-    angular: '',
-    svelte: '',
-    js: '',
-    typescript: '',
-  }
+  public categoryImg: object = CATEGORY_THUMB
 }
 </script>
 <style lang="scss" scoped>

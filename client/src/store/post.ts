@@ -17,7 +17,7 @@ const post: Module<State, RootState> = {
   },
 
   mutations: {
-    setPostList(state, payload: Array<PostModel>) {
+    setPostList (state, payload: Array<PostModel>) {
       payload.map((item, idx) => {
         idx <= 4 ? state.recentList.push(item) : state.postList.push(item)
       })
@@ -25,7 +25,7 @@ const post: Module<State, RootState> = {
   },
 
   actions: {
-    async getPostList({ commit }) {
+    async getPostList ({ commit }) {
       const { data } = await axios.get('/api/post/list').then(res => res)
       commit('setPostList', data)
     },
