@@ -22,7 +22,6 @@ export default Vue.extend({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: #000;
   min-height: 100vh;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 

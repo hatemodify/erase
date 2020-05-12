@@ -41,7 +41,7 @@ export default class Main extends Vue {
   color: #fff;
 }
 .tit-section {
-  color: #fff;
+  color: #373D40;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;

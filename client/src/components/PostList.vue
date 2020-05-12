@@ -17,7 +17,7 @@ export default class PostList extends Vue {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-auto-flow: row dense;
-  grid-gap: 1.9vw;
+  grid-gap: 10px;
   padding-bottom: 50px;
   li {
     float: left;

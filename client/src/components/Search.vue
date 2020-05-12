@@ -24,7 +24,6 @@ export default class Search extends Vue {
 <style lang="scss" scoped>
 .search-comp{
     overflow: hidden;
-    margin-bottom: 50px;
 }
 .search-bar {
   position: relative;
@@ -32,7 +31,6 @@ export default class Search extends Vue {
   height: 40px;
   line-height: 20px;
   width: calc(50% - 5px);
-  max-width: 500px;
   .tf-search {
     border: 0 none;
     background: none;
@@ -40,7 +38,6 @@ export default class Search extends Vue {
     width: 100%;
     height: 40px;
     outline: none;
-    color: #fff;
     &:focus {
       border-color: #ff3465;
     }

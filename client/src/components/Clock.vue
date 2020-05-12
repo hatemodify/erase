@@ -64,6 +64,7 @@ export default class Clock extends Vue {
   float: right;
   text-align: right;
   font-size: 42px;
+  color:#3D4345;
   .current-time {
     font-size: 42px;
     line-height: 50px;
