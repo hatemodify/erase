@@ -1,8 +1,11 @@
 <template>
   <ul class="recent-list">
     <li v-for="(item, idx) in post" :key="idx" :class="item.category">
-      <router-link to>
-        <strong class="tit-post">{{item.title}}</strong>
+      <router-link :to="`/post/detail/${encodeURI(item.title)}`">
+        <div class="wrap-info">
+          <strong class="tit-post">{{item.title}}</strong>
+          <span class="txt-category">{{item.category}}</span>
+        </div>
         <div class="thumb-post">
           <img :src="categoryImg[item.category]" />
         </div>
@@ -31,6 +34,7 @@ export default class RecentList extends Vue {
   padding-bottom: 50px;
   li {
     position: relative;
+    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
     &:after {
       position: absolute;
       left: 0;
@@ -40,7 +44,7 @@ export default class RecentList extends Vue {
       background: rgb(0, 0, 0);
       background: linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.25) 0%,
         rgba(255, 255, 255, 0) 100%
       );
       content: '';
@@ -50,19 +54,32 @@ export default class RecentList extends Vue {
       grid-row: 1 / span 2;
     }
   }
-  .thumb-post img {
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    object-fit: cover;
+  .thumb-post {
+    img {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+    }
   }
-  .tit-post {
+
+  .wrap-info {
     position: absolute;
     left: 20px;
-    bottom: 20px;
+    bottom: 30px;
     z-index: 1;
-    font-size: 16px;
-    color: #fff;
+    text-align: left;
+    .txt-category {
+      font-size: 1rpx;
+      color: #eee;
+    }
+    .tit-post {
+      display: block;
+      font-size: 18px;
+      color: #fff;
+    }
   }
 }
 </style>
+
+

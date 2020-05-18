@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import { Main, Write } from '@/views'
+import { Main, Write, Detail } from '@/views'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -14,6 +14,11 @@ const routes: Array<RouteConfig> = [
     name: 'Write',
     component: Write,
   },
+  {
+    path: '/post/detail/:title',
+    name: 'Detail',
+    component: Detail,
+  },  
 ]
 
 const router = new VueRouter({

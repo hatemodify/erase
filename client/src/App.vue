@@ -21,7 +21,6 @@ export default Vue.extend({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   min-height: 100vh;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -150,6 +149,8 @@ q:after {
   content: '';
   content: none;
 }
+a{text-decoration: none;color: inherit}
+a:visited{color: inherit}
 table {
   border-collapse: collapse;
   border-spacing: 0;

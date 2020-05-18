@@ -7,3 +7,13 @@ export const CATEGORY_THUMB = {
   vue: require('@/assets/images/thumb_vue.jpg'),
   angular: require('@/assets/images/thumb_vue.jpg'),
 }
+
+export const CATEGORY_NAME = {
+  node: 'Node.js',
+  js: 'Javascript',
+  ts: 'Typescript',
+  svelte: 'Svelte',
+  react: 'React',
+  vue: 'Vue',
+  angular: 'Angular',
+}

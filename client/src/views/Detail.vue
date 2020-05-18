@@ -1,10 +1,12 @@
 <template>
   <div class="content-inner">
-    <search />
-    <h2 class="tit-section">recent post</h2>
-    <recent-list :post="recentData" />
-    <h2 class="tit-section">post List</h2>
-    <post-list :post="postData" />
+    <article class="post-detail">
+      <header class="header-post">
+        <h2 class="tit-post">{{detail.title}}</h2>
+      </header>
+      <div class="cpost-contents"></div>
+      {{detail.contents}}
+    </article>
   </div>
 </template>
 
@@ -25,20 +27,23 @@ const post = namespace('Post')
 })
 export default class Main extends Vue {
   @post.Getter
-  public postData!: Array<PostModel>
-  @post.Getter
-  public recentData!: Array<PostModel>
+  public detail!: PostModel
+  @post.Mutation
+  public resetDetail: () => void
   @post.Action
-  public getPostList!: () => void
+  public getPostDetail!: (title: string) => void
   created() {
-    this.getPostList()
+    this.getPostDetail(this.$route.params.title)
+  }
+  destroyed() {
+    this.resetDetail()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .tit-section {
-  color: #373D40;
+  color: #373d40;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;

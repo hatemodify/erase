@@ -7,5 +7,11 @@ router.get("/list", (req, res) => {
 		res.send(data);
 	});
 });
+router.get("/detail/:title", (req, res) => {
+	const { title } = req.params;
+	POST.find({ title }, (err, data) => {
+		res.send(data[0]);
+	});
+});
 
 module.exports = router;

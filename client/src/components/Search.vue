@@ -34,7 +34,7 @@ export default class Search extends Vue {
   .tf-search {
     border: 0 none;
     background: none;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid #999;
     width: 100%;
     height: 40px;
     outline: none;
