@@ -10,7 +10,7 @@ const routes: Array<RouteConfig> = [
     component: Main,
   },
   {
-    path: '/post/wirte',
+    path: '/post/write',
     name: 'Write',
     component: Write,
   },
@@ -18,7 +18,7 @@ const routes: Array<RouteConfig> = [
     path: '/post/detail/:title',
     name: 'Detail',
     component: Detail,
-  },  
+  },
 ]
 
 const router = new VueRouter({

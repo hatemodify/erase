@@ -40,6 +40,14 @@ export default class Search extends Vue {
     outline: none;
     &:focus {
       border-color: #ff3465;
+      +.btn-search{
+        &:after{
+          border-color: #999;
+        }
+        &:before{
+          background: #999
+        }
+      }
     }
   }
   .btn-search {
@@ -59,18 +67,20 @@ export default class Search extends Vue {
       position: absolute;
       width: 12px;
       height: 12px;
-      border: 2px solid #e3e3e3;
+      border: 2px solid #ccc;
       border-radius: 50%;
       content: '';
+      transition: .5s border;
     }
     &:before {
       position: absolute;
       width: 2px;
       height: 12px;
-      background: #e3e3e3;
+      background: #ccc;
       top: 16px;
       left: calc(40% + 10px);
       transform: rotate(-45deg);
+      transition: .5s background;
       content: '';
     }
   }

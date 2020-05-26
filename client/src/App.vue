@@ -113,7 +113,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   font-family: 'Noto Sans KR', 'Malgun Gothic';
   vertical-align: baseline;
 }
@@ -149,8 +148,13 @@ q:after {
   content: '';
   content: none;
 }
-a{text-decoration: none;color: inherit}
-a:visited{color: inherit}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:visited {
+  color: inherit;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -160,7 +164,7 @@ table {
   padding: 65px 150px 20px 150px;
   margin: auto;
 }
-*{
+* {
   box-sizing: border-box;
 }
 </style>

@@ -14,4 +14,17 @@ router.get("/detail/:title", (req, res) => {
 	});
 });
 
+router.post("/write", (req, res) => {
+	const POST_DATA = req.body;
+
+	const new_post = new POST({
+		title: POST_DATA.title,
+		category: POST_DATA.category,
+		contents: POST_DATA.contents,
+	});
+	new_post.save();
+
+	res.send("success");
+});
+
 module.exports = router;

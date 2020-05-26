@@ -3,9 +3,11 @@ import PostListComp from './PostList.vue'
 import ClockComp from './Clock.vue'
 import SearchComp from './Search.vue'
 import RecentListComp from './RecentList.vue'
+import EditorIconComp from './EditorIcon.vue'
 
 export const Header = HeaderComp
 export const PostList = PostListComp
 export const Clock = ClockComp
 export const Search = SearchComp
 export const RecentList = RecentListComp
+export const EditorIcon = EditorIconComp

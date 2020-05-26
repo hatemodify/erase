@@ -26,9 +26,9 @@ const post: Module<State, RootState> = {
     setPostDetail(state, payload: any) {
       state.postDetail = payload
     },
-    resetDetail(state){
+    resetDetail(state) {
       state.postDetail = {}
-    }
+    },
   },
 
   actions: {
@@ -41,6 +41,12 @@ const post: Module<State, RootState> = {
         .get(`/api/post/detail/${title}`)
         .then(res => res)
       commit('setPostDetail', data)
+    },
+    async writePost({ commit }, postData) {
+      console.log(postData)
+      await axios.post(`/api/post/write`, postData).then(res => {
+        console.log(res)
+      })
     },
   },
 }

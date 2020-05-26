@@ -8,6 +8,7 @@ const POST_MODEL = {
 	author: {
 		type: String,
 		require: true,
+		default: "MAD",
 	},
 	category: {
 		type: String,

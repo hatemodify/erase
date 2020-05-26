@@ -17,3 +17,13 @@ export const CATEGORY_NAME = {
   vue: 'Vue',
   angular: 'Angular',
 }
+
+export const CATEGORY = [
+  'Node.js',
+  'js',
+  'ts',
+  'Svelte',
+  'react',
+  'vue',
+  'Angular',
+]

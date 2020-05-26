@@ -4,8 +4,7 @@
       <header class="header-post">
         <h2 class="tit-post">{{detail.title}}</h2>
       </header>
-      <div class="cpost-contents"></div>
-      {{detail.contents}}
+      <div class="post-contents" v-html="detail.contents"></div>
     </article>
   </div>
 </template>
