@@ -2,7 +2,9 @@
   <div id="app">
     <Header />
     <div id="content">
-      <router-view />
+      <transition :name="transitionName" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -10,9 +12,31 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Header from './components/Header.vue'
 
+const DEFAULT_TRANSITION = 'perspective'
 export default Vue.extend({
   components: {
     Header,
+  },
+  data() {
+    return {
+      transitionName: DEFAULT_TRANSITION,
+    }
+  },
+  created() {
+    console.log(this.transitionName)
+    this.$router.beforeEach((to, from, next) => {
+      let transitionName = to.meta.transitionName || from.meta.transitionName
+
+      if (transitionName === 'slide') {
+        const toDepth = to.path.split('/').length
+        const fromDepth = from.path.split('/').length
+        transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      }
+
+      this.transitionName = transitionName || DEFAULT_TRANSITION
+
+      next()
+    })
   },
 })
 </script>
@@ -167,4 +191,5 @@ table {
 * {
   box-sizing: border-box;
 }
+@import url('assets/style/transition.scss');
 </style>

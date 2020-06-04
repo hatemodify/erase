@@ -5,6 +5,7 @@
     <recent-list :post="recentData" />
     <h2 class="tit-section">post List</h2>
     <post-list :post="postData" />
+    <router-link to="/post/write" style="position:absolute;bottom:100px;right:100px;">write</router-link>
   </div>
 </template>
 
@@ -38,7 +39,7 @@ export default class Main extends Vue {
 
 <style lang="scss" scoped>
 .tit-section {
-  color: #373D40;
+  color: #373d40;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;

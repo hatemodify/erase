@@ -8,6 +8,9 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Main',
     component: Main,
+    meta: {
+      transitionName: 'perspective',
+    },
   },
   {
     path: '/post/write',
@@ -18,6 +21,9 @@ const routes: Array<RouteConfig> = [
     path: '/post/detail/:title',
     name: 'Detail',
     component: Detail,
+    meta: {
+      transitionName: 'slide-up',
+    },
   },
 ]
 

@@ -1,0 +1,40 @@
+.slide-up-enter-active,
+.slide-up-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+	transition: cubic-bezier(0.55, 0, 0.1, 1) 0.5s opacity, transform;
+	overflow: hidden;
+}
+
+.slide-up-enter,
+.slide-right-leave-active {
+	opacity: 0;
+	transform: translateY(2em);
+}
+
+.slide-up-leave-active,
+.slide-right-enter {
+	opacity: 0;
+	transform: translateY(-2em);
+}
+
+.perspective-enter-active,
+.perspective-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+	transition: cubic-bezier(0.69, 0.14, 0.36, 0.88) 0.4s opacity, transform;
+	overflow: hidden;
+}
+
+.slide-up-enter,
+.slide-right-leave-active {
+	opacity: 0;
+	transform-origin: center;
+	transform: rotateY(-45deg);
+}
+
+.slide-up-leave-active,
+.slide-right-enter {
+	opacity: 0;
+	transform: translateY(-2em);
+}

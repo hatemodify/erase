@@ -1,12 +1,14 @@
 <template>
-  <div class="content-inner">
-    <article class="post-detail">
-      <header class="header-post">
-        <h2 class="tit-post">{{detail.title}}</h2>
-      </header>
-      <div class="post-contents" v-html="detail.contents"></div>
-    </article>
-  </div>
+  <transition appear>
+    <div class="content-inner">
+      <article class="post-detail">
+        <header class="header-post">
+          <h2 class="tit-post">{{detail.title}}</h2>
+        </header>
+        <div class="post-contents" v-html="detail.contents"></div>
+      </article>
+    </div>
+  </transition>
 </template>
 
 
@@ -48,5 +50,15 @@ export default class Main extends Vue {
   text-transform: uppercase;
   padding: 25px 0;
   text-align: left;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fade-in {
+  opacity: 1;
 }
 </style>
