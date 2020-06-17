@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import { Main, Write, Detail } from '@/views'
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -21,6 +22,10 @@ const routes: Array<RouteConfig> = [
     path: '/post/detail/:title',
     name: 'Detail',
     component: Detail,
+    // beforeEnter(to, from, next){
+    //   store.dispatch('Post/getPostDetail', to.params.title)
+    //   next()
+    // },
     meta: {
       transitionName: 'slide-up',
     },

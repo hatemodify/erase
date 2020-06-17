@@ -1,3 +1,5 @@
+import { CategoryModel } from '@/model/CategoryModel'
+
 export const CATEGORY_THUMB = {
   CT01: require('@/assets/images/thumb_js.jpg'),
   CT02: require('@/assets/images/thumb_ts.jpg'),
@@ -18,12 +20,33 @@ export const CATEGORY_NAME = {
   CT07: 'Node.js',
 }
 
-export const CATEGORY = [
-  'Javascript',
-  'Typescript',
-  'React',
-  'Vue',
-  'Angular',
-  'Svelte',
-  'Node.js',
+export const CATEGORY:Array<CategoryModel> = [
+  {
+    name:'Javascript',
+    code:'CT01' ,
+  },
+  {
+    name:'Typescript',
+    code:'CT02' ,
+  },
+  {
+    name:'React',
+    code:'CT03' ,
+  },
+  {
+    name:'Vue',
+    code:'CT04' ,
+  },
+  {
+    name:'Angular',
+    code:'CT05' ,
+  },
+  {
+    name:'Svelte',
+    code:'CT06' ,
+  },
+  {
+    name:'Node.js',
+    code:'CT07' ,
+  },
 ]

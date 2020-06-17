@@ -1,8 +1,6 @@
 <template>
   <div class="icon" :class="[`icon--${name}`, `icon--${size}`, { 'has-align-fix': fixAlign }]">
-    <svg class="icon__svg">
-      <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="'#icon--' + name" />
-    </svg>
+    <img :src="require(`@/assets/icons/${name}.svg`)" :alt="`${name}`" />
   </div>
 </template>
 
@@ -45,6 +43,7 @@ export default class EditorIcon extends Vue {
     margin-right: 0;
   }
 }
+
 // svg sprite
 body > svg,
 .icon use > svg,

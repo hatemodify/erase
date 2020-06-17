@@ -3,9 +3,11 @@ const router = express.Router();
 const { POST } = require("../models");
 
 router.get("/list", (req, res) => {
-	POST.find({}, (err, data) => {
-		res.send(data);
-	});
+	POST.find()
+		.sort({ createdAt: -1 })
+		.then((data) => {
+			res.send(data);
+		});
 });
 router.get("/detail/:title", (req, res) => {
 	const { title } = req.params;

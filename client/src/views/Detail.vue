@@ -5,7 +5,7 @@
         <header class="header-post">
           <h2 class="tit-post">{{detail.title}}</h2>
         </header>
-        <div class="post-contents" v-html="detail.contents"></div>
+        <div class="editor__content" v-html="detail.contents"></div>
       </article>
     </div>
   </transition>
@@ -17,6 +17,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { PostModel } from '../model/PostModel'
 import { PostList, RecentList, Search } from '../components'
+import '@/assets/style/atom-one-dark.scss'
 
 const post = namespace('Post')
 @Component({
