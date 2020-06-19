@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { POST } = require("../models");
 
+
+
+
 router.get("/list", (req, res) => {
 	POST.find()
 		.sort({ createdAt: -1 })

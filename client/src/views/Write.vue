@@ -40,15 +40,6 @@
         >
           <icon name="underline" />
         </button>
-
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.code() }"
-          @click="commands.code"
-        >
-          <icon name="code" />
-        </button>
-
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.heading({ level: 1 }) }"
@@ -110,13 +101,16 @@
         <button class="menubar__button" @click="commands.redo">
           <icon name="redo" />
         </button>
-        <button class="menubar__button" @click="showImagePrompt(commands.image)">
-          <icon name="image" />
-        </button>
+        <label class="menubar__button" for="aaa">
+          <label for="aaa">
+            <icon name="image" />
+          </label>
+        </label>
       </div>
     </editor-menu-bar>
-    <editor-content class="editor__content" :editor="editor" />
+    <editor-content class="editor__content" :editor="editor" ref="editorContent" />
     <button class="btn-write" @click="write()">write!</button>
+    <input type="file" ref="aaa" class="bb" id="aaa" @change="onFileChange" />
   </div>
 </template>
 
@@ -170,13 +164,14 @@ export default class Write extends Vue {
   public title: any = ''
   public categoryList = CATEGORY
   public category: any = ''
+  public postImage: any = []
   public editor = new Editor({
     extensions: [
       new Blockquote(),
       new BulletList(),
       new CodeBlock(),
       new HardBreak(),
-      new Heading({ levels: [1, 2, 3] }),
+      new Heading({ levels: [1, 2, 3, 4, 5] }),
       new HorizontalRule(),
       new ListItem(),
       new OrderedList(),
@@ -197,31 +192,47 @@ export default class Write extends Vue {
         },
       }),
     ],
-    content: `                   <h2>
-            Code Highlighting
-          </h2>
-          <p>
-            These are code blocks with <strong>automatic syntax highlighting</strong> based on highlight.js.
-          </p>
-          <pre><code>${JavaScriptExample}</code></pre>
-          <pre><code>${CSSExample}</code></pre>
-          <p>
-            Note: tiptap doesn't import syntax highlighting language definitions from highlight.js. You
-            <strong>must</strong> import them and initialize the extension with all languages you want to support:
-          </p>
-          <pre><code>${ExplicitImportExample}</code></pre>`,
+    content: ``,
   })
+
   @post.Action
   public writePost!: (postData: any) => void
   write() {
     const postData = {
       title: this.title,
       category: this.category,
-      contents: this.editor.view.docView.dom.innerHTML
+      contents: this.editor.view.docView.dom.innerHTML,
     }
-    this.writePost(postData)
-    console.log()
+    // this.writePost(postData)
+    this.uploadImage()
   }
+  onFileChange(e) {
+    const files = e.target.files || e.dataTransfer.files
+    if (!files.length) return
+    this.createImage(files[0])
+    // this.images.push(this.$refs.reg_thumb.files)
+    // console.log(this.images)
+  }
+  createImage(file) {
+    const image = new Image()
+    const reader = new FileReader()
+
+    reader.onload = e => {
+      const a = document.createElement('figure')
+      a.classList.add('post-image')
+      a.innerHTML = `<img src="${e.target.result}"/>`
+      document.querySelector('.ProseMirror').append(a)
+      this.postImage.push(e.target.result)
+      // this.productData.thumbnail.push(vm.image)
+    }
+    reader.readAsDataURL(file)
+  }
+  uploadImage() {
+    const formData = new FormData()
+    const editorContent = this.$refs.editorContent
+    const imageList = editorContent
+  }
+
 }
 </script>
 
@@ -372,7 +383,6 @@ h3 {
     caret-color: currentColor;
   }
 
-
   ul,
   ol {
     padding-left: 1rem;
@@ -463,6 +473,4 @@ h3 {
     cursor: col-resize;
   }
 }
-
-
 </style>

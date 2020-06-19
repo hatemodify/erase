@@ -20,11 +20,8 @@ const post: Module<State, RootState> = {
 
   mutations: {
     setPostList(state, payload: Array<PostModel>) {
-      payload.filter((item, idx) => {
-        idx > 4
-          ? (state.postList.push(item))
-          : (state.recentList.push(item))
-      })
+      state.recentList = payload.slice(0, 5)
+      state.postList = payload.slice(5)
     },
     setPostDetail(state, payload: any) {
       state.postDetail = payload
