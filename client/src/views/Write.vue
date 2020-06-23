@@ -165,6 +165,7 @@ export default class Write extends Vue {
   public categoryList = CATEGORY
   public category: any = ''
   public postImage: any = []
+  public preview = ''
   public editor = new Editor({
     extensions: [
       new Blockquote(),
@@ -194,43 +195,49 @@ export default class Write extends Vue {
     ],
     content: ``,
   })
+  public html = ''
 
   @post.Action
   public writePost!: (postData: any) => void
   write() {
+    let html
+    const editorContents = this.editor.view.docView.dom.innerHTML
+    const imageSrc = []
+    const rex = /([^>"']*(?:base64)+[^>"']+)["']?[^>]*>/g
+
+
+    while ((html = rex.exec(editorContents))) {
+      imageSrc.push(html[1].split(';base64').pop())
+    }
+
     const postData = {
       title: this.title,
       category: this.category,
-      contents: this.editor.view.docView.dom.innerHTML,
+      contents: editorContents,
+      imageSrc,
     }
-    // this.writePost(postData)
-    this.uploadImage()
+
+    this.writePost(postData)
+    console.log(imageSrc)
+    // this.uploadImage()
   }
   onFileChange(e) {
     const files = e.target.files || e.dataTransfer.files
     if (!files.length) return
     this.createImage(files[0])
-    // this.images.push(this.$refs.reg_thumb.files)
-    // console.log(this.images)
+    // this.preview = URL.createObjectURL(files[0])
   }
   createImage(file) {
+
     const image = new Image()
     const reader = new FileReader()
-
+    const a = document.createElement('figure')
     reader.onload = e => {
-      const a = document.createElement('figure')
-      a.classList.add('post-image')
-      a.innerHTML = `<img src="${e.target.result}"/>`
+      // this.editor.setContent(`<img src="${e.target.result}" class="post-image"/>`)
+      a.innerHTML = `<img src="${e.target.result}" class="post-image"/>`
       document.querySelector('.ProseMirror').append(a)
-      this.postImage.push(e.target.result)
-      // this.productData.thumbnail.push(vm.image)
     }
     reader.readAsDataURL(file)
-  }
-  uploadImage() {
-    const formData = new FormData()
-    const editorContent = this.$refs.editorContent
-    const imageList = editorContent
   }
 
 }

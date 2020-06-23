@@ -1,7 +1,7 @@
 <template>
   <div class="timer-comp">
-    <span class="current-time">{{currentTime}}</span>
-    <span class="current-date">{{currentDate}}</span>
+    <span class="current-time" v-show="hh">{{`${hh}:${mm} ${ampm}`}}</span>
+    <span class="current-date" v-show="month">{{currentDate}}</span>
   </div>
 </template>
 
@@ -37,25 +37,24 @@ export default class Clock extends Vue {
     'December',
   ]
 
-  get currentTime(): string {
-    setInterval(() => {
-      const date = new Date()
-      this.hh = date.getHours() % 12
-      this.hh = this.hh ? this.hh : 12
-      this.mm =
-        date.getMinutes() < 10
-          ? `0${date.getMinutes()}`
-          : date.getMinutes().toString()
-      this.ampm = date.getHours() < 12 ? 'AM' : 'PM'
-    }, 1000)
-
-    return `${this.hh}:${this.mm} ${this.ampm}`
+  currentTime(): any {
+    const date = new Date()
+    this.hh = date.getHours() % 12
+    this.hh = this.hh ? this.hh : 12
+    this.mm =
+      date.getMinutes() < 10
+        ? `0${date.getMinutes()}`
+        : date.getMinutes().toString()
+    this.ampm = date.getHours() < 12 ? 'AM' : 'PM'
   }
   get currentDate(): string {
     const date = new Date()
     return `${this.week[date.getDay()]},${
       this.month[date.getMonth()]
     } ${date.getDate()}`
+  }
+  created() {
+    setInterval(this.currentTime, 1000)
   }
 }
 </script>
@@ -64,7 +63,7 @@ export default class Clock extends Vue {
   float: right;
   text-align: right;
   font-size: 42px;
-  color:#3D4345;
+  color: #3d4345;
   .current-time {
     font-size: 42px;
     line-height: 50px;
