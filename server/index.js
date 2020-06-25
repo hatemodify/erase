@@ -10,6 +10,8 @@ const router = express.Router();
 const app = express();
 const POST = require("./models/post");
 const test = require("./models/test");
+const fs = require("fs");
+const mime = require("mime");
 
 const Router = require("./router");
 
@@ -47,6 +49,14 @@ app.use(cors());
 // app.use('/user', require('./router/user'))
 
 app.use("/post", Router.POST);
+
+app.get("/images/:name", (req, res) => {
+	const { name } = req.params;
+	fs.readFile(`images/${name}`, (err, data) => {
+		res.writeHead(200, { "Content-Type": "image/jpg" });
+		res.end(data);
+	});
+});
 
 http.createServer(app).listen(9998, function () {
 	console.log("Https server listening on port " + 9998);

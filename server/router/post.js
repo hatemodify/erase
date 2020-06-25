@@ -19,31 +19,28 @@ router.get("/detail/:title", (req, res) => {
 
 router.post("/write", (req, res) => {
 	const POST_DATA = req.body;
+	const newImageName = [];
 
-	POST_DATA.imageSrc.forEach((item, idx) => {
-		const name = createImage(idx, item);
-		POST_DATA.contents.replace(
-			/<img[^>]*src=[\"']?([^>\"']*(?:base64)+[^>\"']+)[\"']?[^>]*>/g,
-			`<img src="${name}"/>`
-		);
+	// POST_DATA.imageSrc.forEach((item, idx) => {
+	// 	newImageName.push(createImage(idx, item));
+
+	// 	if (idx === POST_DATA.imageSrc.length - 1) {
+	// 	}
+	// });
+	processArray(POST_DATA.imageSrc, newImageName, POST_DATA.contents);
+
+	const new_post = new POST({
+		title: POST_DATA.title,
+		category: POST_DATA.category,
+		contents: POST_DATA.contents,
 	});
-
-	setTimeout(() => {
-		console.log(POST_DATA.contents);
-
-		const new_post = new POST({
-			title: POST_DATA.title,
-			category: POST_DATA.category,
-			contents: POST_DATA.contents,
-		});
-		new_post.save();
-		res.send("success");
-	}, 5000);
+	new_post.save();
+	res.send("success");
 });
 
-function createImage(idx, base64Image, data) {
+function createImage(base64Image) {
 	const imageName = Math.random() * (100 - 5) + 6;
-	const name = `images/${imageName}${idx}.png`;
+	const name = `images/${imageName}.png`;
 	fs.writeFile(
 		name,
 		base64Image,
@@ -51,6 +48,22 @@ function createImage(idx, base64Image, data) {
 		(err, success) => name
 	);
 	return name;
+}
+
+
+async function processArray(array, arr, data) {
+	for (const item of array) {
+		await arr.push(createImage(item));
+	}
+	replaceUrl(arr, data);
+}
+
+function replaceUrl(arr, data) {
+	const regex = /(data:image\/[^;]+;base64[^"]+)/;
+
+	arr.forEach((item, idx) => {
+		data = data.replace(regex, `http://localhost:9998/${item}`);
+	});
 }
 
 module.exports = router;

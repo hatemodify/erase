@@ -200,12 +200,11 @@ export default class Write extends Vue {
   @post.Action
   public writePost!: (postData: any) => void
   write() {
+    if (!this.title || !this.category) return
     let html
     const editorContents = this.editor.view.docView.dom.innerHTML
     const imageSrc = []
     const rex = /([^>"']*(?:base64)+[^>"']+)["']?[^>]*>/g
-
-
     while ((html = rex.exec(editorContents))) {
       imageSrc.push(html[1].split(';base64').pop())
     }
@@ -218,8 +217,6 @@ export default class Write extends Vue {
     }
 
     this.writePost(postData)
-    console.log(imageSrc)
-    // this.uploadImage()
   }
   onFileChange(e) {
     const files = e.target.files || e.dataTransfer.files
@@ -227,19 +224,17 @@ export default class Write extends Vue {
     this.createImage(files[0])
     // this.preview = URL.createObjectURL(files[0])
   }
-  createImage(file) {
-
+  createImage(file: any) {
     const image = new Image()
     const reader = new FileReader()
     const a = document.createElement('figure')
-    reader.onload = e => {
-      // this.editor.setContent(`<img src="${e.target.result}" class="post-image"/>`)
+    // const b = URL.createObjectURL(file)
+    reader.onload = (e: any) => {
       a.innerHTML = `<img src="${e.target.result}" class="post-image"/>`
       document.querySelector('.ProseMirror').append(a)
     }
     reader.readAsDataURL(file)
   }
-
 }
 </script>
 
