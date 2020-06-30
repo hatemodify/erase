@@ -11,6 +11,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Header from './components/Header.vue'
+import '@/assets/style/transition.scss'
+import '@/assets/style/editor-style.scss'
 
 const DEFAULT_TRANSITION = 'perspective'
 export default Vue.extend({
@@ -183,7 +185,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+button{
+  cursor: pointer;
+}
 #content {
   padding: 65px 150px 20px 150px;
   margin: auto;
@@ -191,38 +195,8 @@ table {
 * {
   box-sizing: border-box;
 }
-.editor__content {
-  pre {
-    padding: 0.7rem 1rem;
-    border-radius: 5px;
-    // background: #2d2b57;
-    // color: #e3dfff;
-    font-size: 0.8rem;
-    overflow-x: auto;
-    &::before {
-      content: attr(data-language);
-      text-transform: uppercase;
-      display: block;
-      text-align: right;
-      font-weight: bold;
-      font-size: 0.6rem;
-    }
-
-    code {
-      display: block;
-      padding: 0.2rem 0.4rem;
-      border-radius: 5px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      color: rgb(171, 178, 191);
-      padding: 0.5em;
-      background: rgb(40, 44, 52);
-      line-height: 1.75em;
-      font-size: 14px;
-    }
-  }
+.ov-h{
+  overflow: hidden;
 }
-
-@import url('assets/style/transition.scss');
-
 </style>
+

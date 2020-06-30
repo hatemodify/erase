@@ -1,6 +1,6 @@
 <template>
   <div class="icon" :class="[`icon--${name}`, `icon--${size}`, { 'has-align-fix': fixAlign }]">
-    <img :src="require(`@/assets/icons/${name}.svg`)" :alt="`${name}`" />
+    <img :src="require(`@/assets/icons/${name}.svg`)" :alt="`${name}`" class="icon__svg"/>
   </div>
 </template>
 
@@ -22,10 +22,9 @@ export default class EditorIcon extends Vue {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 0.8rem;
-  height: 0.8rem;
-  margin: 0 0.3rem;
-  top: -0.05rem;
+  width: 12px;
+  height: 12px;
+  margin: 0 auto;
   fill: currentColor;
   // &.has-align-fix {
   // 	top: -.1rem;
@@ -35,6 +34,7 @@ export default class EditorIcon extends Vue {
     vertical-align: top;
     width: 100%;
     height: 100%;
+    margin-top: -1px
   }
   &:first-child {
     margin-left: 0;

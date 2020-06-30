@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
 import { PostModel } from '@/model/PostModel'
+import router from '@/router'
 
 interface State {
   postList: Array<PostModel>
@@ -43,9 +44,8 @@ const post: Module<State, RootState> = {
       commit('setPostDetail', data)
     },
     async writePost({ commit }, postData) {
-      console.log(postData)
       await axios.post(`/api/post/write`, postData).then(res => {
-        console.log(res)
+        if (res.status === 200) router.push('/')
       })
     },
   },

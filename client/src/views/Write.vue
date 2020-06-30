@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <input type="text" v-model="title" />
+  <div class="content-inner">
+    <input type="text" v-model="title" class="tf-title" placeholder="Title" />
     <ul class="list-category">
       <li v-for="item in categoryList" :key="item.code">
-        <label :for="`category-${item.code}`">{{item.name}}</label>
-        <input type="radio" :value="item.code" v-model="category" :id="`category-${item.code}`" />
+        <input
+          type="radio"
+          :value="item.code"
+          v-model="category"
+          :id="`category-${item.code}`"
+          class="inp-category"
+        />
+        <label :for="`category-${item.code}`" class="lab-category">{{item.name}}</label>
       </li>
     </ul>
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
@@ -101,16 +107,19 @@
         <button class="menubar__button" @click="commands.redo">
           <icon name="redo" />
         </button>
-        <label class="menubar__button" for="aaa">
-          <label for="aaa">
+        <button class="menubar__button" for="aaa">
+          <label for="inp-file" class="icon lab-file">
             <icon name="image" />
+            <input type="file" ref="aaa" class="inp-hide" id="inp-file" @change="onFileChange" />
           </label>
-        </label>
+        </button>
       </div>
     </editor-menu-bar>
     <editor-content class="editor__content" :editor="editor" ref="editorContent" />
-    <button class="btn-write" @click="write()">write!</button>
-    <input type="file" ref="aaa" class="bb" id="aaa" @change="onFileChange" />
+    <div class="ov-h">
+      <button class="btn-write" @click="write()">write!</button>
+      <router-link to="/">back</router-link>
+    </div>
   </div>
 </template>
 
@@ -121,7 +130,6 @@ import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
 import { namespace } from 'vuex-class'
 import { EditorIcon } from '../components'
 import { CATEGORY } from '../constants'
-
 import {
   Blockquote,
   CodeBlock,
@@ -218,7 +226,7 @@ export default class Write extends Vue {
 
     this.writePost(postData)
   }
-  onFileChange(e) {
+  onFileChange(e: any) {
     const files = e.target.files || e.dataTransfer.files
     if (!files.length) return
     this.createImage(files[0])
@@ -239,240 +247,64 @@ export default class Write extends Vue {
 </script>
 
 <style lang="scss" >
-$color-black: #000000;
-$color-white: #ffffff;
-$color-grey: #dddddd;
-button {
-  background: none;
+.tf-title {
+  display: block;
+  font-size: 24px;
   border: none;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.3;
-}
-
-.button {
-  font-weight: bold;
-  display: inline-flex;
-  background: transparent;
-  border: 0;
-  color: $color-black;
-  padding: 0.2rem 0.5rem;
-  margin-right: 0.2rem;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: rgba($color-black, 0.1);
-
-  &:hover {
-    background-color: rgba($color-black, 0.15);
+  border-bottom: 1px solid #e3e3e3;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  outline: none;
+  &::-webkit-input-placeholder {
+    color: #999;
   }
 }
-
-.message {
-  background-color: rgba($color-black, 0.05);
-  color: rgba($color-black, 0.7);
-  padding: 1rem;
-  border-radius: 6px;
-  margin-bottom: 1.5rem;
-  font-style: italic;
-}
-.menububble {
+.inp-hide,
+.inp-category {
   position: absolute;
-  display: flex;
-  z-index: 20;
-  background: $color-black;
-  border-radius: 5px;
-  padding: 0.3rem;
-  margin-bottom: 0.5rem;
-  transform: translateX(-50%);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s, visibility 0.2s;
-
-  &.is-active {
-    opacity: 1;
-    visibility: visible;
+  left: -9999px;
+  top: -9999px;
+  height: 0px;
+  width: 0px;
+}
+.list-category {
+  overflow: hidden;
+  max-width: 980px;
+  margin-bottom: 10px;
+  border-right: 1px solid #e3e3e3;
+  li {
+    float: left;
+    border: 1px solid #e3e3e3;
+    font-size: 13px;
+    width: 14.2857%;
+    border-right: 0 none;
   }
-
-  &__button {
-    display: inline-flex;
-    background: transparent;
-    border: 0;
-    color: $color-white;
-    padding: 0.2rem 0.5rem;
-    margin-right: 0.2rem;
-    border-radius: 3px;
-    cursor: pointer;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &:hover {
-      background-color: rgba($color-white, 0.1);
-    }
-
-    &.is-active {
-      background-color: rgba($color-white, 0.2);
-    }
-  }
-
-  &__form {
-    display: flex;
-    align-items: center;
-  }
-
-  &__input {
-    font: inherit;
+  .inp-category:checked + .lab-category {
+    background: #333;
+    color: #fff;
     border: none;
-    background: transparent;
-    color: $color-white;
-  }
-}
-
-.menubar {
-  margin-bottom: 1rem;
-  transition: visibility 0.2s 0.4s, opacity 0.2s 0.4s;
-
-  &.is-hidden {
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  &.is-focused {
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 0.2s, opacity 0.2s;
-  }
-
-  &__button {
     font-weight: bold;
-    display: inline-flex;
-    background: transparent;
-    border: 0;
-    color: $color-black;
-    padding: 0.2rem 0.5rem;
-    margin-right: 0.2rem;
-    border-radius: 3px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba($color-black, 0.05);
-    }
-
-    &.is-active {
-      background-color: rgba($color-black, 0.1);
-    }
   }
-
-  [class^='__button'] {
-    font-size: 13.3333px;
+  .lab-category {
+    display: block;
+    line-height: 30px;
+    cursor: pointer;
+    text-align: center;
   }
 }
-
-.editor__content {
-  border: 1px solid #e3e3e3;
-  position: relative;
-  max-width: 30rem;
-  margin: 0 auto 5rem auto;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-
-  * {
-    caret-color: currentColor;
-  }
-
-  ul,
-  ol {
-    padding-left: 1rem;
-  }
-
-  li > p,
-  li > ol,
-  li > ul {
-    margin: 0;
-  }
-
-  a {
-    color: inherit;
-  }
-
-  blockquote {
-    border-left: 3px solid rgba($color-black, 0.1);
-    color: rgba($color-black, 0.8);
-    padding-left: 0.8rem;
-    font-style: italic;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    border-radius: 3px;
-  }
-
-  table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
-
-    td,
-    th {
-      min-width: 1em;
-      border: 2px solid $color-grey;
-      padding: 3px 5px;
-      vertical-align: top;
-      box-sizing: border-box;
-      position: relative;
-      > * {
-        margin-bottom: 0;
-      }
-    }
-
-    th {
-      font-weight: bold;
-      text-align: left;
-    }
-
-    .selectedCell:after {
-      z-index: 2;
-      position: absolute;
-      content: '';
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: rgba(200, 200, 255, 0.4);
-      pointer-events: none;
-    }
-
-    .column-resize-handle {
-      position: absolute;
-      right: -2px;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      z-index: 20;
-      background-color: #adf;
-      pointer-events: none;
-    }
-  }
-
-  .tableWrapper {
-    margin: 1em 0;
-    overflow-x: auto;
-  }
-
-  .resize-cursor {
-    cursor: ew-resize;
-    cursor: col-resize;
-  }
+.editor-wrap {
+  max-width: 980px;
+}
+.lab-file {
+  cursor: pointer;
+  height: 12px;
+}
+.btn-write {
+  float: right;
+  height: 40px;
+  width: 120px;
+  color: #fff;
+  background: #333;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <ul class="post-list">
     <li v-for="(item, idx) in post" :key="idx" :class="item.category">
-      <router-link :to="`/post/detail/${encodeURI(item.title)}`">
+      <router-link :to="`/post/detail/${encodeURI(item.title)}`" class="link-post">
         <div class="thumb-post">
           <img :src="categoryImg[item.category]" />
         </div>
@@ -73,5 +73,9 @@ export default class PostList extends Vue {
     position: relative;
     padding: 30px 15px 20px 15px;
   }
+}
+.link-post{
+  display: block;
+  height: 100%;
 }
 </style>

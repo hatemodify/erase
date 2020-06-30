@@ -58,6 +58,6 @@ app.get("/images/:name", (req, res) => {
 	});
 });
 
-http.createServer(app).listen(9998, function () {
+http.createServer(app).listen(9998, () => {
 	console.log("Https server listening on port " + 9998);
 });
