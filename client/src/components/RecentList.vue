@@ -1,17 +1,19 @@
 <template>
-  <ul class="recent-list">
-    <li v-for="(item, idx) in post" :key="idx" :class="item.category">
-      <router-link :to="`/post/detail/${encodeURI(item.title)}`">
-        <div class="wrap-info">
-          <strong class="tit-post">{{item.title}}</strong>
-          <span class="txt-category">{{item.category}}</span>
-        </div>
-        <div class="thumb-post">
-          <img :src="categoryImg[item.category]" />
-        </div>
-      </router-link>
-    </li>
-  </ul>
+  <transition name="slide-fade">
+    <ul class="recent-list">
+      <li v-for="(item, idx) in post" :key="idx" :class="{[item.category]:item.category, v:item}">
+        <router-link :to="`/post/detail/${encodeURI(item.title)}`">
+          <div class="wrap-info">
+            <strong class="tit-post">{{item.title}}</strong>
+            <span class="txt-category">{{item.category}}</span>
+          </div>
+          <div class="thumb-post">
+            <img :src="categoryImg[item.category]" />
+          </div>
+        </router-link>
+      </li>
+    </ul>
+  </transition>
 </template>
 
 
@@ -25,6 +27,17 @@ export default class RecentList extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: scaleX(0);
+  opacity: 0;
+}
 .recent-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -35,6 +48,10 @@ export default class RecentList extends Vue {
   li {
     position: relative;
     box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
+
+    &.v{
+      transform:scaleX(1);
+    }
     &:after {
       position: absolute;
       left: 0;

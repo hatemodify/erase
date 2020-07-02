@@ -191,6 +191,7 @@ button{
 #content {
   padding: 65px 150px 20px 150px;
   margin: auto;
+  perspective:800px;
 }
 * {
   box-sizing: border-box;

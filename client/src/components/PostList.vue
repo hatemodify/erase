@@ -26,10 +26,6 @@ export default class PostList extends Vue {
   @Prop() post!: Array<any>
   public categoryImg: object = CATEGORY_THUMB
   public categoryName: object = CATEGORY_NAME
-
-  created() {
-    console.log(this.post)
-  }
 }
 </script>
 <style lang="scss" scoped>

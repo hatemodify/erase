@@ -3,8 +3,10 @@
     <search />
     <h2 class="tit-section">recent post</h2>
     <recent-list :post="recentData" />
-    <h2 class="tit-section">post List</h2>
-    <post-list :post="postData" />
+    <template v-if="postData.length >= 1">
+      <h2 class="tit-section">post List</h2>
+      <post-list :post="postData" />
+    </template>
     <router-link to="/post/write" style="position:absolute;bottom:100px;right:100px;">write</router-link>
   </div>
 </template>

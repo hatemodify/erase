@@ -6,6 +6,7 @@ const { POST } = require("../models");
 router.get("/list", (req, res) => {
 	POST.find()
 		.sort({ createdAt: -1 })
+		.limit(10)
 		.then((data) => {
 			res.send(data);
 		});
