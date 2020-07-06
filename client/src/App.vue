@@ -6,11 +6,16 @@
         <router-view />
       </transition>
     </div>
+    <div class="dimmed" v-show="dimmedStatus">
+      <alert />
+    </div>
   </div>
 </template>
 <script lang="ts">
+import { mapActions, mapGetters } from 'vuex'
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Header from './components/Header.vue'
+import Alert from './components/Alert.vue'
 import '@/assets/style/transition.scss'
 import '@/assets/style/editor-style.scss'
 
@@ -18,6 +23,10 @@ const DEFAULT_TRANSITION = 'perspective'
 export default Vue.extend({
   components: {
     Header,
+    Alert,
+  },
+  computed: {
+    ...mapGetters(['dimmedStatus']),
   },
   data() {
     return {
@@ -25,7 +34,6 @@ export default Vue.extend({
     }
   },
   created() {
-    console.log(this.transitionName)
     this.$router.beforeEach((to, from, next) => {
       let transitionName = to.meta.transitionName || from.meta.transitionName
 
@@ -185,19 +193,28 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-button{
+button {
   cursor: pointer;
 }
 #content {
   padding: 65px 150px 20px 150px;
   margin: auto;
-  perspective:800px;
+  perspective: 800px;
 }
 * {
   box-sizing: border-box;
 }
-.ov-h{
+.ov-h {
   overflow: hidden;
+}
+.dimmed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 </style>
 

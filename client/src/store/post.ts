@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Module } from 'vuex'
 import { RootState } from '@/store/index'
 import { PostModel } from '@/model/PostModel'
+import { MESSAGE } from '@/constants'
 import router from '@/router'
 
 interface State {
@@ -44,9 +45,14 @@ const post: Module<State, RootState> = {
       commit('setPostDetail', data)
     },
     async writePost({ commit }, postData) {
-      await axios.post(`/api/post/write`, postData).then(res => {
-        if (res.status === 200) router.push('/')
-      })
+      const iconType = 'success'
+      const msgTxt = '등록 완료'
+      commit('setDimmedStatus', { iconType, msgTxt }, { root: true })
+      // await axios.post(`/api/post/write`, postData).then(res => {
+      //   if (res.status === 200) {
+
+      //   }
+      // })
     },
   },
 }

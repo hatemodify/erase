@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
-import { namespace } from 'vuex-class'
+import { namespace, State, Mutation } from 'vuex-class'
 import { EditorIcon, EditorMenu } from '../components'
 import { CATEGORY } from '../constants'
 import {
@@ -103,8 +103,12 @@ export default class Write extends Vue {
   })
   public html = ''
 
+  @Mutation
+  public setDimmedStatus!: () => void
+
   @post.Action
   public writePost!: (postData: any) => void
+
   write() {
     if (!this.title || !this.category) return
     let html
@@ -121,7 +125,6 @@ export default class Write extends Vue {
       contents: editorContents,
       imageSrc,
     }
-
     this.writePost(postData)
   }
 

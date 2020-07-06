@@ -2,18 +2,18 @@
 .slide-up-leave-active {
 	transition:1s;
 	overflow: hidden;
-	transform: rotateY(90deg);
+	transform: rotateY(-180deg);
+	opacity: 0;
 }
 
 
 .slide-up-enter-active{
 	// transform: translateY(2em);
-	transition:1s;
+	transition-delay: .5s;
 	transform-origin: center;
-	transform: rotateY(90deg);
+	transform: rotateY(-90deg);
 }
 .slide-up-enter-to{
-	transition-delay: 1s;
 }
 
 
