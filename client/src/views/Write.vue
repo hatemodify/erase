@@ -192,4 +192,7 @@ export default class Write extends Vue {
   color: #fff;
   background: #333;
 }
+a{
+  display: inline;
+}
 </style>
