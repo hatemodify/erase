@@ -48,11 +48,11 @@ const post: Module<State, RootState> = {
       const iconType = 'success'
       const msgTxt = '등록 완료'
       commit('setDimmedStatus', { iconType, msgTxt }, { root: true })
-      // await axios.post(`/api/post/write`, postData).then(res => {
-      //   if (res.status === 200) {
-
-      //   }
-      // })
+      await axios.post(`/api/post/write`, postData).then(res => {
+        if (res.status === 200) {
+          console.log('success')
+        }
+      })
     },
   },
 }
